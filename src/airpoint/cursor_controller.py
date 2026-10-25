@@ -43,6 +43,17 @@ class CursorController:
 
         if not self.mock_mode:
             try:
+                # Ensure thread is attached to the interactive desktop if running in subprocess/service
+                import win32service, win32con
+                try:
+                    desk = win32service.OpenDesktop('default', 0, False, win32con.GENERIC_ALL)
+                    desk.SetThreadDesktop()
+                except Exception:
+                    pass
+            except ImportError:
+                pass
+
+            try:
                 self._user32 = ctypes.windll.user32
             except (AttributeError, OSError):
                 # Non-Windows or ctypes unavailable: fallback to mock mode
