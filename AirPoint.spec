@@ -1,9 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_submodules
 from PyInstaller.utils.hooks import collect_all
 
 datas = [('models/hand_landmarker.task', 'models')]
 binaries = []
 hiddenimports = []
+hiddenimports += collect_submodules('matplotlib')
 tmp_ret = collect_all('mediapipe')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 
@@ -17,7 +19,7 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['torch', 'torchvision', 'pandas', 'pyarrow', 'scipy', 'matplotlib', 'IPython'],
+    excludes=['torch', 'torchvision', 'pandas', 'pyarrow', 'scipy'],
     noarchive=False,
     optimize=0,
 )
