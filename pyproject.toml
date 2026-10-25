@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airpoint"
+version = "1.0.0"
+description = "Webcam-Based 3D Air Mouse for Windows"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python>=4.8.0",
+    "mediapipe>=0.10.0",
+    "PySide6>=6.5.0",
+    "numpy>=1.24.0",
+    "pywin32>=306",
+]
+
+[project.scripts]
+airpoint = "airpoint.main:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
