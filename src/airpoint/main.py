@@ -31,6 +31,11 @@ def parse_args():
         action="store_true",
         help="Run in virtual mock mode without controlling real Windows cursor"
     )
+    parser.add_argument(
+        "--autostart",
+        action="store_true",
+        help="Automatically begin camera tracking upon launch"
+    )
     return parser.parse_args()
 
 
@@ -59,6 +64,10 @@ def main():
         window.cursor.mock_mode = True
 
     window.show()
+
+    if args.autostart:
+        window.start_tracking()
+
     sys.exit(app.exec())
 
 
